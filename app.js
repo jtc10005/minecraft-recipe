@@ -18,7 +18,7 @@ function toggleModFilters() {
 
 // Select all mods
 function selectAllMods() {
-    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]:not([disabled])');
     checkboxes.forEach(checkbox => {
         if (!checkbox.checked) {
             checkbox.checked = true;
@@ -30,7 +30,7 @@ function selectAllMods() {
 
 // Deselect all mods
 function deselectAllMods() {
-    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]:not([disabled])');
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             checkbox.checked = false;
@@ -51,12 +51,31 @@ function populateItemSelect() {
     const itemSelect = document.getElementById('item-select');
     const items = getAllItemNames();
     
+    // Clear existing options except the first one
+    itemSelect.innerHTML = '<option value="">-- Select an item --</option>';
+    
     items.forEach(item => {
         const option = document.createElement('option');
         option.value = item.id;
         option.textContent = item.name;
         itemSelect.appendChild(option);
     });
+    
+    // Clear the search input
+    const searchInput = document.getElementById('item-search');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    // Clear any displayed recipe tree
+    const recipeTree = document.getElementById('recipe-tree');
+    const materialsSummary = document.getElementById('materials-summary');
+    if (recipeTree) {
+        recipeTree.innerHTML = '';
+    }
+    if (materialsSummary) {
+        materialsSummary.style.display = 'none';
+    }
 }
 
 // Setup event listeners
@@ -118,6 +137,26 @@ function showCraftingTree() {
 // Create a tree node for an item
 function createTreeNode(itemId, quantity, depth) {
     const recipe = RECIPES[itemId];
+    
+    // If recipe doesn't exist (ingredient from disabled mod), show as unavailable
+    if (!recipe) {
+        const node = document.createElement('div');
+        node.className = 'tree-node';
+        node.style.marginLeft = `${depth * 20}px`;
+        
+        const header = document.createElement('div');
+        header.className = 'item-header';
+        
+        const itemInfo = document.createElement('span');
+        itemInfo.className = 'item-info';
+        const displayQty = quantity % 1 === 0 ? quantity : quantity.toFixed(2);
+        itemInfo.innerHTML = `<strong>${itemId}</strong> × ${displayQty} <span style="color: #ff9800;">(requires disabled mod)</span>`;
+        
+        header.appendChild(itemInfo);
+        node.appendChild(header);
+        return node;
+    }
+    
     const node = document.createElement('div');
     node.className = 'tree-node';
     node.style.marginLeft = `${depth * 20}px`;
@@ -202,6 +241,12 @@ function calculateRawMaterials(itemId, quantity) {
     function addMaterials(itemId, qty) {
         const recipe = RECIPES[itemId];
         
+        // If recipe doesn't exist (from disabled mod), count as raw material
+        if (!recipe) {
+            materials[itemId] = (materials[itemId] || 0) + qty;
+            return;
+        }
+        
         // If this is a raw material (no ingredients), add it
         if (!recipe.ingredients || recipe.ingredients.length === 0) {
             materials[itemId] = (materials[itemId] || 0) + qty;
@@ -227,13 +272,21 @@ function displayRawMaterials(materials) {
 
     // Sort materials by name
     const sortedMaterials = Object.entries(materials)
-        .map(([id, qty]) => ({ id, name: RECIPES[id].name, qty }))
+        .map(([id, qty]) => {
+            const recipe = RECIPES[id];
+            return { 
+                id, 
+                name: recipe ? recipe.name : id, 
+                qty,
+                category: recipe ? recipe.category : 'unknown'
+            };
+        })
         .sort((a, b) => a.name.localeCompare(b.name));
 
     // Group by category
     const byCategory = {};
     sortedMaterials.forEach(material => {
-        const category = RECIPES[material.id].category;
+        const category = material.category;
         if (!byCategory[category]) {
             byCategory[category] = [];
         }
