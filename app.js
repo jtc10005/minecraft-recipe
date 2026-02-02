@@ -212,6 +212,19 @@ function createTreeNode(itemId, quantity, depth) {
     const displayQty = quantity % 1 === 0 ? quantity : quantity.toFixed(2);
     itemInfo.innerHTML = `<strong>${recipe.name}</strong> × ${displayQty}`;
     
+    // Add crafting station if available
+    if (recipe.craftedIn) {
+        const craftingStation = document.createElement('span');
+        craftingStation.className = 'crafting-station';
+        craftingStation.textContent = `🔧 ${recipe.craftedIn}`;
+        craftingStation.title = `Click to see how to craft ${recipe.craftedIn}`;
+        craftingStation.onclick = (e) => {
+            e.stopPropagation();
+            expandCraftingStation(node, recipe.craftedIn, depth);
+        };
+        itemInfo.appendChild(craftingStation);
+    }
+    
     // Add category badge
     const badge = document.createElement('span');
     badge.className = `category-badge ${recipe.category}`;
@@ -254,6 +267,140 @@ function toggleNode(node, toggleBtn) {
         toggleBtn.textContent = '▼';
         toggleBtn.classList.remove('collapsed');
     }
+}
+
+// Expand crafting station recipe
+function expandCraftingStation(parentNode, stationName, depth) {
+    // Try to find the recipe for the crafting station
+    // Convert name to likely item ID (e.g., "Crafting Table" -> "crafting_table")
+    const stationId = stationName.toLowerCase().replace(/\s+/g, '_');
+    
+    const stationRecipe = RECIPES[stationId];
+    if (!stationRecipe) {
+        alert(`Recipe for ${stationName} not found. Add it to the database!`);
+        return;
+    }
+    
+    // Check if station recipe is already expanded
+    const existingStation = parentNode.querySelector(`[data-station-id="${stationId}"]`);
+    if (existingStation) {
+        // Already showing, remove it
+        existingStation.remove();
+        
+        // If children container is now empty, hide it
+        const childrenContainer = parentNode.querySelector('.children-container');
+        if (childrenContainer && childrenContainer.children.length === 0) {
+            childrenContainer.style.display = 'none';
+            const toggleBtn = parentNode.querySelector('.toggle-btn');
+            if (toggleBtn) {
+                toggleBtn.textContent = '▶';
+                toggleBtn.classList.add('collapsed');
+            }
+        }
+        
+        // Recalculate raw materials
+        recalculateRawMaterials();
+        return;
+    }
+    
+    // Create a children container if it doesn't exist
+    let childrenContainer = parentNode.querySelector('.children-container');
+    if (!childrenContainer) {
+        childrenContainer = document.createElement('div');
+        childrenContainer.className = 'children-container';
+        parentNode.appendChild(childrenContainer);
+    }
+    
+    // Create the station node
+    const stationNode = createTreeNode(stationId, 1, depth + 1);
+    stationNode.setAttribute('data-station-id', stationId);
+    
+    // Insert at the beginning
+    childrenContainer.insertBefore(stationNode, childrenContainer.firstChild);
+    
+    // Make sure it's visible
+    childrenContainer.style.display = 'block';
+    
+    // Update toggle button if exists
+    const toggleBtn = parentNode.querySelector('.toggle-btn');
+    if (toggleBtn) {
+        toggleBtn.textContent = '▼';
+        toggleBtn.classList.remove('collapsed');
+    }
+    
+    // Recalculate raw materials
+    recalculateRawMaterials();
+}
+
+// Recalculate raw materials from the current tree
+function recalculateRawMaterials() {
+    if (!selectedItem) return;
+    
+    // Get all visible items in the tree and calculate their raw materials
+    const materials = {};
+    
+    function gatherFromNode(node) {
+        // Get the item ID from the node
+        const itemHeader = node.querySelector('.item-header');
+        if (!itemHeader) return;
+        
+        // Skip if this is a collapsed node's children
+        if (node.style.display === 'none') return;
+        
+        // Get item info from the header
+        const itemName = itemHeader.querySelector('strong')?.textContent;
+        if (!itemName) return;
+        
+        // Find the recipe by name
+        let itemId = null;
+        for (const [id, recipe] of Object.entries(RECIPES)) {
+            if (recipe.name === itemName) {
+                itemId = id;
+                break;
+            }
+        }
+        
+        // Get quantity
+        const quantityText = itemHeader.textContent.match(/×\s*([\d.]+)/);
+        const quantity = quantityText ? parseFloat(quantityText[1]) : 1;
+        
+        if (itemId) {
+            addMaterialsToList(itemId, quantity, materials);
+        }
+        
+        // Process children
+        const childrenContainer = node.querySelector('.children-container');
+        if (childrenContainer && childrenContainer.style.display !== 'none') {
+            const childNodes = childrenContainer.querySelectorAll(':scope > .tree-node');
+            childNodes.forEach(childNode => gatherFromNode(childNode));
+        }
+    }
+    
+    function addMaterialsToList(itemId, qty, materialsList) {
+        const recipe = RECIPES[itemId];
+        if (!recipe) {
+            materialsList[itemId] = (materialsList[itemId] || 0) + qty;
+            return;
+        }
+        
+        if (!recipe.ingredients || recipe.ingredients.length === 0) {
+            materialsList[itemId] = (materialsList[itemId] || 0) + qty;
+        } else {
+            recipe.ingredients.forEach(ingredient => {
+                const ingredientQty = qty * ingredient.count;
+                addMaterialsToList(ingredient.item, ingredientQty, materialsList);
+            });
+        }
+    }
+    
+    // Start with the root item
+    const treeContainer = document.getElementById('recipe-tree');
+    const rootNode = treeContainer.querySelector('.tree-node');
+    if (rootNode) {
+        gatherFromNode(rootNode);
+    }
+    
+    displayRawMaterials(materials);
 }
 
 // Calculate raw materials needed

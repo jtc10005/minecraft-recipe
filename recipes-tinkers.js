@@ -2,19 +2,33 @@
 const TINKERS_RECIPES = {
     "grout": { 
         name: "Grout", 
-        ingredients: [{ item: "sand", count: 1 }, { item: "gravel", count: 1 }, { item: "clay_ball", count: 1 }], 
+        ingredients: [
+            { item: "sand", count: 1 }, 
+            { item: "gravel", count: 1 }, 
+            { item: "clay_ball", count: 1 },
+            { item: "water_bucket", count: 1 }
+        ], 
         category: "tinkers",
-        yield: 2 
+        yield: 2,
+        craftedIn: "Crafting Table",
+        note: "GTNH requires water bucket" 
     },
     "seared_brick": { 
         name: "Seared Brick", 
-        ingredients: [{ item: "grout", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "tinkers" 
+        ingredients: [
+            { item: "grout", count: 1 }, 
+            { item: "wooden_form", count: 1 },
+            { item: "coal", count: 0.125 }
+        ], 
+        category: "tinkers",
+        craftedIn: "Furnace",
+        note: "GTNH requires wooden form" 
     },
     "seared_bricks": { 
         name: "Seared Bricks", 
         ingredients: [{ item: "seared_brick", count: 4 }], 
-        category: "tinkers" 
+        category: "tinkers",
+        craftedIn: "Crafting Table"
     },
     "smeltery_controller": { 
         name: "Smeltery Controller", 
@@ -88,5 +102,19 @@ const TINKERS_RECIPES = {
         name: "Casting Basin", 
         ingredients: [{ item: "seared_bricks", count: 7 }], 
         category: "tinkers" 
+    },
+    
+    // Raw materials for GTNH
+    "wooden_form": {
+        name: "Wooden Form",
+        ingredients: null,
+        category: "raw",
+        note: "GTNH item"
+    },
+    "water_bucket": {
+        name: "Water Bucket",
+        ingredients: null,
+        category: "raw",
+        note: "Fill bucket with water"
     },
 };

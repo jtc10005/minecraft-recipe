@@ -392,6 +392,27 @@ header p {
     font-size: 1.05rem;
 }
 
+.crafting-station {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    background: rgba(74, 144, 226, 0.2);
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.crafting-station:hover {
+    background: rgba(74, 144, 226, 0.4);
+    border-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
 .category-badge {
     display: inline-block;
     padding: 4px 10px;

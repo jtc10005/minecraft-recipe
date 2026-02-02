@@ -11,7 +11,7 @@ const VANILLA_RECIPES = {
     "diamond": { name: "Diamond", ingredients: null, category: "raw" },
     "gold_ore": { name: "Gold Ore", ingredients: null, category: "raw" },
     "sand": { name: "Sand", ingredients: null, category: "raw" },
-    "sandstone": { name: "Sandstone", ingredients: [{ item: "sand", count: 4 }], category: "basic" },
+    "sandstone": { name: "Sandstone", ingredients: [{ item: "sand", count: 4 }], category: "basic", craftedIn: "Crafting Table" },
     "gravel": { name: "Gravel", ingredients: null, category: "raw" },
     "clay_ball": { name: "Clay Ball", ingredients: null, category: "raw" },
     "string": { name: "String", ingredients: null, category: "raw" },
@@ -30,36 +30,41 @@ const VANILLA_RECIPES = {
     "wheat": { name: "Wheat", ingredients: null, category: "raw" },
     "lapis_lazuli": { name: "Lapis Lazuli", ingredients: null, category: "raw" },
     "glowstone_dust": { name: "Glowstone Dust", ingredients: null, category: "raw" },
-    "charcoal": { name: "Charcoal", ingredients: [{ item: "oak_log", count: 1 }, { item: "coal", count: 0.125 }], category: "smelted" },
+    "charcoal": { name: "Charcoal", ingredients: [{ item: "oak_log", count: 1 }, { item: "coal", count: 0.125 }], category: "smelted", craftedIn: "Furnace" },
     "red_dye": { name: "Red Dye", ingredients: null, category: "raw" },
     "yellow_dye": { name: "Yellow Dye", ingredients: null, category: "raw" },
-    "stone_button": { name: "Stone Button", ingredients: [{ item: "stone", count: 1 }], category: "basic" },
+    "stone_button": { name: "Stone Button", ingredients: [{ item: "stone", count: 1 }], category: "basic", craftedIn: "Crafting Table" },
 
     // ========== SMELTED ITEMS ==========
     "iron_ingot": { 
         name: "Iron Ingot", 
         ingredients: [{ item: "iron_ore", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "smelted" 
+        category: "smelted",
+        craftedIn: "Furnace"
     },
     "gold_ingot": { 
         name: "Gold Ingot", 
         ingredients: [{ item: "gold_ore", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "smelted" 
+        category: "smelted",
+        craftedIn: "Furnace"
     },
     "glass": { 
         name: "Glass", 
         ingredients: [{ item: "sand", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "smelted" 
+        category: "smelted",
+        craftedIn: "Furnace"
     },
     "brick": { 
         name: "Brick", 
         ingredients: [{ item: "clay_ball", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "smelted" 
+        category: "smelted",
+        craftedIn: "Furnace"
     },
     "stone": { 
         name: "Stone", 
         ingredients: [{ item: "cobblestone", count: 1 }, { item: "coal", count: 0.125 }], 
-        category: "smelted" 
+        category: "smelted",
+        craftedIn: "Furnace"
     },
 
     // ========== BASIC CRAFTED ITEMS ==========

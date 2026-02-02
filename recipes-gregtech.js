@@ -46,16 +46,6 @@ const GREGTECH_RECIPES = {
         category: "basic",
         note: "GregTech modifies vanilla recipe (requires iron)" 
     },
-    "bed": { 
-        name: "Bed", 
-        ingredients: [
-            { item: "oak_planks", count: 3 }, 
-            { item: "wool", count: 3 },
-            { item: "iron_ingot", count: 3 }
-        ], 
-        category: "basic",
-        note: "GregTech modifies vanilla recipe (requires iron)" 
-    },
     "piston": { 
         name: "Piston", 
         ingredients: [
