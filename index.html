@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Recipe Crafter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⛏️ Minecraft Recipe Crafter</h1>
+            <p>Select an item to see its crafting tree and required materials</p>
+        </header>
+
+        <div class="mod-filters">
+            <h3>📦 Enabled Mods:</h3>
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-vanilla" checked onchange="toggleMod('vanilla', this.checked)">
+                    <span>Vanilla Minecraft</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-tinkers" checked onchange="toggleMod('tinkers', this.checked)">
+                    <span>Tinkers Construct</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-gregtech" checked onchange="toggleMod('gregtech', this.checked)">
+                    <span>GregTech</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-appliedenergistics" checked onchange="toggleMod('appliedenergistics', this.checked)">
+                    <span>Applied Energistics</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-industrialcraft" checked onchange="toggleMod('industrialcraft', this.checked)">
+                    <span>Industrial Craft</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-buildcraft" checked onchange="toggleMod('buildcraft', this.checked)">
+                    <span>BuildCraft</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-sgcraft" checked onchange="toggleMod('sgcraft', this.checked)">
+                    <span>SGCraft (Stargate)</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-thaumcraft" checked onchange="toggleMod('thaumcraft', this.checked)">
+                    <span>Thaumcraft</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-enderio" checked onchange="toggleMod('enderio', this.checked)">
+                    <span>EnderIO</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-forestry" checked onchange="toggleMod('forestry', this.checked)">
+                    <span>Forestry</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-railcraft" checked onchange="toggleMod('railcraft', this.checked)">
+                    <span>Railcraft</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-extrautilities" checked onchange="toggleMod('extrautilities', this.checked)">
+                    <span>Extra Utilities</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-botania" checked onchange="toggleMod('botania', this.checked)">
+                    <span>Botania</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-enderstorage" checked onchange="toggleMod('enderstorage', this.checked)">
+                    <span>Ender Storage</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-ironchests" checked onchange="toggleMod('ironchests', this.checked)">
+                    <span>Iron Chests</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-opencomputers" checked onchange="toggleMod('opencomputers', this.checked)">
+                    <span>OpenComputers</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mod-harvestcraft" checked onchange="toggleMod('harvestcraft', this.checked)">
+                    <span>Pam's HarvestCraft</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <label for="item-search">Search for an item:</label>
+            <input type="text" id="item-search" placeholder="Type to search items...">
+            <select id="item-select" size="10">
+                <option value="">-- Select an item --</option>
+            </select>
+            <button id="craft-button">Show Crafting Tree</button>
+        </div>
+
+        <div id="recipe-tree" class="recipe-tree"></div>
+
+        <div id="materials-summary" class="materials-summary" style="display: none;">
+            <h2>📦 Raw Materials Needed</h2>
+            <div id="materials-list"></div>
+        </div>
+    </div>
+
+    <script src="recipes-vanilla.js"></script>
+    <script src="recipes-tinkers.js"></script>
+    <script src="recipes-gregtech.js"></script>
+    <script src="recipes-appliedenergistics.js"></script>
+    <script src="recipes-industrialcraft.js"></script>
+    <script src="recipes-buildcraft.js"></script>
+    <script src="recipes-sgcraft.js"></script>
+    <script src="recipes-thaumcraft.js"></script>
+    <script src="recipes-enderio.js"></script>
+    <script src="recipes-forestry.js"></script>
+    <script src="recipes-railcraft.js"></script>
+    <script src="recipes-extrautilities.js"></script>
+    <script src="recipes-botania.js"></script>
+    <script src="recipes-enderstorage.js"></script>
+    <script src="recipes-ironchests.js"></script>
+    <script src="recipes-opencomputers.js"></script>
+    <script src="recipes-harvestcraft.js"></script>
+    <script src="recipes.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
