@@ -2,6 +2,44 @@
 
 let selectedItem = null;
 
+// Toggle mod filters section
+function toggleModFilters() {
+    const checkboxGroup = document.getElementById('mod-checkbox-group');
+    const icon = document.getElementById('mod-toggle-icon');
+    
+    checkboxGroup.classList.toggle('collapsed');
+    
+    if (checkboxGroup.classList.contains('collapsed')) {
+        icon.textContent = '▶';
+    } else {
+        icon.textContent = '▼';
+    }
+}
+
+// Select all mods
+function selectAllMods() {
+    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            const modName = checkbox.id.replace('mod-', '');
+            toggleMod(modName, true);
+        }
+    });
+}
+
+// Deselect all mods
+function deselectAllMods() {
+    const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            const modName = checkbox.id.replace('mod-', '');
+            toggleMod(modName, false);
+        }
+    });
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     populateItemSelect();

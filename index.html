@@ -14,8 +14,14 @@
         </header>
 
         <div class="mod-filters">
-            <h3>📦 Enabled Mods:</h3>
-            <div class="checkbox-group">
+            <h3 class="collapsible-header" onclick="toggleModFilters()">
+                📦 Enabled Mods: <span id="mod-toggle-icon">▶</span>
+            </h3>
+            <div class="checkbox-group collapsed" id="mod-checkbox-group">
+                <div class="mod-select-all">
+                    <button class="mod-btn" onclick="selectAllMods()">✓ Select All</button>
+                    <button class="mod-btn" onclick="deselectAllMods()">✗ Deselect All</button>
+                </div>
                 <label class="checkbox-label">
                     <input type="checkbox" id="mod-vanilla" checked onchange="toggleMod('vanilla', this.checked)">
                     <span>Vanilla Minecraft</span>
