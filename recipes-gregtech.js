@@ -1,5 +1,89 @@
 // GregTech Recipes
 const GREGTECH_RECIPES = {
+    // GregTech modifications to vanilla recipes (makes them harder)
+    "furnace": { 
+        name: "Furnace", 
+        ingredients: [
+            { item: "cobblestone", count: 6 }, 
+            { item: "flint", count: 3 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe" 
+    },
+    "crafting_table": { 
+        name: "Crafting Table", 
+        ingredients: [
+            { item: "oak_planks", count: 3 }, 
+            { item: "flint", count: 2 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe" 
+    },
+    "chest": { 
+        name: "Chest", 
+        ingredients: [
+            { item: "oak_planks", count: 8 }
+        ], 
+        category: "storage",
+        note: "GregTech modifies vanilla recipe (same ingredients, different arrangement)" 
+    },
+    "torch": { 
+        name: "Torch", 
+        ingredients: [
+            { item: "stick", count: 1 }, 
+            { item: "coal", count: 0.25 }
+        ], 
+        category: "basic",
+        yield: 2,
+        note: "GregTech modifies vanilla recipe (less yield)" 
+    },
+    "wooden_door": { 
+        name: "Wooden Door", 
+        ingredients: [
+            { item: "oak_planks", count: 6 }, 
+            { item: "iron_ingot", count: 1 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe (requires iron)" 
+    },
+    "bed": { 
+        name: "Bed", 
+        ingredients: [
+            { item: "oak_planks", count: 3 }, 
+            { item: "wool", count: 3 },
+            { item: "iron_ingot", count: 3 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe (requires iron)" 
+    },
+    "piston": { 
+        name: "Piston", 
+        ingredients: [
+            { item: "oak_planks", count: 3 }, 
+            { item: "cobblestone", count: 4 },
+            { item: "iron_ingot", count: 1 },
+            { item: "redstone", count: 1 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe (requires iron)" 
+    },
+    "bowl": { 
+        name: "Bowl", 
+        ingredients: [
+            { item: "oak_planks", count: 3 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe (requires saw)" 
+    },
+    "bucket": { 
+        name: "Bucket", 
+        ingredients: [
+            { item: "iron_ingot", count: 4 }
+        ], 
+        category: "basic",
+        note: "GregTech modifies vanilla recipe (4 iron instead of 3)" 
+    },
+    
     // Raw materials
     "copper_ore": { 
         name: "Copper Ore", 
