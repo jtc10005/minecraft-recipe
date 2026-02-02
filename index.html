@@ -94,12 +94,18 @@
         </div>
 
         <div class="search-section">
-            <label for="item-search">Search for an item:</label>
-            <input type="text" id="item-search" placeholder="Type to search items...">
-            <select id="item-select" size="10">
-                <option value="">-- Select an item --</option>
-            </select>
-            <button id="craft-button">Show Crafting Tree</button>
+            <div class="collapsible-header" onclick="toggleSearchSection()">
+                <h3>🔍 Search & Craft Item</h3>
+                <span id="search-toggle-icon">▼</span>
+            </div>
+            <div id="search-content" class="search-content">
+                <label for="item-search">Search for an item:</label>
+                <input type="text" id="item-search" placeholder="Type to search items...">
+                <select id="item-select" size="10">
+                    <option value="">-- Select an item --</option>
+                </select>
+                <button id="craft-button">Show Crafting Tree</button>
+            </div>
         </div>
 
         <div id="recipe-tree" class="recipe-tree"></div>

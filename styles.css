@@ -188,11 +188,31 @@ header p {
 
 /* Search Section */
 .search-section {
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     margin-bottom: 30px;
+}
+
+.search-section h3 {
+    margin: 0 0 15px 0;
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.search-content {
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+.search-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
 }
 
 .search-section label {
@@ -262,10 +282,10 @@ header p {
     cursor: not-allowed;
 }
 
-/* Recipe Tree */
+/* Recipe Tree - Family Tree Style */
 .recipe-tree {
     background: var(--surface);
-    padding: 20px;
+    padding: 40px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     margin-bottom: 30px;
@@ -273,24 +293,68 @@ header p {
 }
 
 .tree-node {
-    margin: 5px 0;
+    position: relative;
+    margin: 0;
+    padding: 10px 0;
     transition: all 0.3s ease;
 }
 
+.tree-node::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color) 0%, transparent 100%);
+}
+
+.tree-node:last-child::before {
+    height: 40px;
+}
+
 .item-header {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 12px;
-    background: var(--surface-light);
-    border-radius: 5px;
-    border-left: 3px solid var(--primary-color);
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--surface-light) 0%, rgba(26, 77, 122, 0.3) 100%);
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    margin-left: 50px;
     margin-bottom: 5px;
-    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+    transition: all 0.3s;
+}
+
+.item-header::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.item-header::after {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 3px var(--surface);
 }
 
 .item-header:hover {
-    background: #1a4d7a;
-    transform: translateX(5px);
+    background: linear-gradient(135deg, #1a4d7a 0%, rgba(74, 144, 226, 0.4) 100%);
+    transform: translateX(5px) scale(1.02);
+    border-color: var(--secondary-color);
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4);
 }
 
 .toggle-btn {
@@ -400,9 +464,20 @@ header p {
 }
 
 .children-container {
-    border-left: 2px dashed var(--border);
-    padding-left: 10px;
-    margin-left: 12px;
+    position: relative;
+    margin-left: 30px;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.children-container::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: 2px;
+    height: calc(100% + 10px);
+    background: linear-gradient(to bottom, var(--primary-color) 0%, rgba(74, 144, 226, 0.3) 100%);
 }
 
 /* Materials Summary */

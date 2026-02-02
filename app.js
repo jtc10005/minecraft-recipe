@@ -16,6 +16,20 @@ function toggleModFilters() {
     }
 }
 
+// Toggle search section
+function toggleSearchSection() {
+    const searchContent = document.getElementById('search-content');
+    const icon = document.getElementById('search-toggle-icon');
+    
+    searchContent.classList.toggle('collapsed');
+    
+    if (searchContent.classList.contains('collapsed')) {
+        icon.textContent = '▶';
+    } else {
+        icon.textContent = '▼';
+    }
+}
+
 // Select all mods
 function selectAllMods() {
     const checkboxes = document.querySelectorAll('.mod-filters input[type="checkbox"]:not([disabled])');
@@ -121,6 +135,14 @@ function showCraftingTree() {
 
     const recipe = RECIPES[selectedItem];
     if (!recipe) return;
+
+    // Collapse the search section
+    const searchContent = document.getElementById('search-content');
+    const searchIcon = document.getElementById('search-toggle-icon');
+    if (searchContent && !searchContent.classList.contains('collapsed')) {
+        searchContent.classList.add('collapsed');
+        searchIcon.textContent = '▶';
+    }
 
     const treeContainer = document.getElementById('recipe-tree');
     treeContainer.innerHTML = '';
