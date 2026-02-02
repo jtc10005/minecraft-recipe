@@ -10,15 +10,6 @@ const GREGTECH_RECIPES = {
         category: "basic",
         note: "GregTech modifies vanilla recipe" 
     },
-    "crafting_table": { 
-        name: "Crafting Table", 
-        ingredients: [
-            { item: "oak_planks", count: 3 }, 
-            { item: "flint", count: 2 }
-        ], 
-        category: "basic",
-        note: "GregTech modifies vanilla recipe" 
-    },
     "chest": { 
         name: "Chest", 
         ingredients: [

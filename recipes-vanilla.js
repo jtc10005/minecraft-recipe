@@ -94,8 +94,12 @@ const VANILLA_RECIPES = {
     },
     "crafting_table": { 
         name: "Crafting Table", 
-        ingredients: [{ item: "oak_planks", count: 4 }], 
-        category: "basic" 
+        ingredients: [
+            { item: "oak_log", count: 2 },
+            { item: "flint", count: 2 }
+        ], 
+        category: "basic",
+        craftedIn: "Crafting Table"
     },
     "chest": { 
         name: "Chest", 
